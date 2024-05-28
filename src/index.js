@@ -47,27 +47,49 @@ function Menu() {
 
 function Footer() {
   const hour = new Date().getHours();
-  const jamBuka = 8;
+  const jamBuka = 12;
   const jamTutup = 22;
   const isOpen = hour >= jamBuka && hour <= jamTutup;
 
+  if (isOpen) {
+    return (
+      <FooterOpenHour
+        jamBuka={jamBuka}
+        jamTutup={jamTutup}
+      />
+    );
+  } else {
+    return (
+      <FooterClosedHour
+        jamBuka={jamBuka}
+        jamTutup={jamTutup}
+      />
+    );
+  }
+}
+
+function FooterOpenHour(props) {
   return (
     <footer className="footer">
-      {isOpen ? (
-        <div className="order">
-          <p>
-            {new Date().getFullYear()} Warung Jaya Abadi - All rights reserved. || Buka jam {jamBuka} - Tutup jam {jamTutup}
-          </p>
-          <button className="btn">Order</button>
-        </div>
-      ) : (
-        <div className="closed">
-          <h3>Warung Jaya Abadi TUTUP</h3>
-          <p>
-            <b>{new Date().getFullYear()}</b> All rights reserved - Warung Jaya Abadi || Buka jam {jamBuka}.00 WIB - Tutup jam {jamTutup}.00 WIB
-          </p>
-        </div>
-      )}
+      <div className="order">
+        <p>
+          {new Date().getFullYear()} - All rights reserved - Warung Jaya Abadi || Buka jam {props.jamBuka}.00 - Tutup jam {props.jamTutup}.00
+        </p>
+        <button className="btn">Order</button>
+      </div>
+    </footer>
+  );
+}
+
+function FooterClosedHour(props) {
+  return (
+    <footer className="footer">
+      <div className="closed">
+        <h3>Warung Jaya Abadi TUTUP</h3>
+        <p>
+          <b>{new Date().getFullYear()}</b> - All rights reserved - Warung Jaya Abadi || Buka jam {props.jamBuka}.00 WIB - Tutup jam {props.jamTutup}.00 WIB
+        </p>
+      </div>
     </footer>
   );
 }
