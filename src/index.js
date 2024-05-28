@@ -22,22 +22,26 @@ function Header() {
 }
 
 function Menu() {
-  const foods = [];
-  // const foods = data;
+  // const foods = [];
+  const foods = data;
   const numFoods = foods.length;
 
   return (
     <main className="menu">
       <h2>Menu items</h2>
       {numFoods > 0 ? (
-        <ul className="foods">
-          {data.map((food) => (
-            <Food
-              foodObj={food}
-              key={food.nama}
-            />
-          ))}
-        </ul>
+        <React.Fragment>
+          <p>Aneka makanan indonesia yang disajikan oleh warteg jaya abadi sebagai pemenuhan makanan kesehatan yang diperlukan dalam kehidupan sehari-hari.</p>
+
+          <ul className="foods">
+            {data.map((food) => (
+              <Food
+                foodObj={food}
+                key={food.nama}
+              />
+            ))}
+          </ul>
+        </React.Fragment>
       ) : (
         <p>Mohon Maaf Stok Habis, Silahkan Datang Kembali Besok.</p>
       )}
@@ -47,7 +51,7 @@ function Menu() {
 
 function Footer() {
   const hour = new Date().getHours();
-  const jamBuka = 12;
+  const jamBuka = 8;
   const jamTutup = 22;
   const isOpen = hour >= jamBuka && hour <= jamTutup;
 
@@ -68,12 +72,12 @@ function Footer() {
   }
 }
 
-function FooterOpenHour(props) {
+function FooterOpenHour({ jamBuka, jamTutup }) {
   return (
     <footer className="footer">
       <div className="order">
         <p>
-          {new Date().getFullYear()} - All rights reserved - Warung Jaya Abadi || Buka jam {props.jamBuka}.00 - Tutup jam {props.jamTutup}.00
+          {new Date().getFullYear()} - All rights reserved - Warung Jaya Abadi || Buka jam {jamBuka}.00 - Tutup jam {jamTutup}.00
         </p>
         <button className="btn">Order</button>
       </div>
@@ -81,13 +85,13 @@ function FooterOpenHour(props) {
   );
 }
 
-function FooterClosedHour(props) {
+function FooterClosedHour({ jamBuka, jamTutup }) {
   return (
     <footer className="footer">
       <div className="closed">
         <h3>Warung Jaya Abadi TUTUP</h3>
         <p>
-          <b>{new Date().getFullYear()}</b> - All rights reserved - Warung Jaya Abadi || Buka jam {props.jamBuka}.00 WIB - Tutup jam {props.jamTutup}.00 WIB
+          <b>{new Date().getFullYear()}</b> - All rights reserved - Warung Jaya Abadi || Buka jam {jamBuka}.00 WIB - Tutup jam {jamTutup}.00 WIB
         </p>
       </div>
     </footer>
@@ -95,20 +99,20 @@ function FooterClosedHour(props) {
 }
 
 function Food(props) {
-  console.log(props);
+  const { nama, deskripsi, harga, foto, stok } = props.foodObj;
   return (
     <li className="food">
       <img
-        src={props.foodObj.foto}
-        alt={props.foodObj.nama}
-        width={100}
-        height={70}
+        src={foto}
+        alt={nama}
       />
-      <div className="">
-        <h3>{props.foodObj.nama}</h3>
-        <p>{props.foodObj.deskripsi}</p>
-        <b>Rp. {props.foodObj.harga}</b>
-        <span>Stok : {props.foodObj.stok}</span>
+      <div>
+        <h3>{nama}</h3>
+        <p>{deskripsi}</p>
+        <p>
+          <b>Rp. {harga}</b>
+        </p>
+        <p>Stok : {stok}</p>
       </div>
     </li>
   );
