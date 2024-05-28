@@ -76,10 +76,10 @@ function FooterOpenHour({ jamBuka, jamTutup }) {
   return (
     <footer className="footer">
       <div className="order">
+        <button className="btn">Order</button>
         <p>
           {new Date().getFullYear()} - All rights reserved - Warung Jaya Abadi || Buka jam {jamBuka}.00 - Tutup jam {jamTutup}.00
         </p>
-        <button className="btn">Order</button>
       </div>
     </footer>
   );
