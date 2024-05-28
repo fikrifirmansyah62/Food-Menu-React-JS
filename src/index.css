@@ -179,6 +179,14 @@ body {
   background-color: #e9bb24;
 }
 
+.closed h3 {
+  text-align: center;
+  color: #ff0000;
+  font-size: 65px;
+  text-shadow: #252525 0 0 10px;
+  text-transform: uppercase;
+}
+
 /*
 SPACING SYSTEM (px)
 2 / 4 / 8 / 12 / 16 / 24 / 32 / 40 / 48 / 64 / 80 / 96 / 128

@@ -22,26 +22,25 @@ function Header() {
 }
 
 function Menu() {
+  const foods = [];
+  // const foods = data;
+  const numFoods = foods.length;
+
   return (
     <main className="menu">
       <h2>Menu items</h2>
-
-      <ul className="foods">
-        {data.map((food) => (
-          <Food
-            foodObj={food}
-            key={food.nama}
-          />
-        ))}
-      </ul>
-
-      {/* <Food
-        nama="Nasi Goreng"
-        harga={20000}
-        deskripsi="Nasi goreng dengan rasa pedas"
-        foto="food/nasi-goreng.jpg"
-        stok={Math.random() >= 0.5 ? true : false}
-      /> */}
+      {numFoods > 0 ? (
+        <ul className="foods">
+          {data.map((food) => (
+            <Food
+              foodObj={food}
+              key={food.nama}
+            />
+          ))}
+        </ul>
+      ) : (
+        <p>Mohon Maaf Stok Habis, Silahkan Datang Kembali Besok.</p>
+      )}
     </main>
   );
 }
@@ -49,17 +48,26 @@ function Menu() {
 function Footer() {
   const hour = new Date().getHours();
   const jamBuka = 8;
-  const jamTutup = 20;
-
-  if (hour < jamBuka || hour > jamTutup) {
-    alert("Warteg Jaya Abadi Tutup");
-  } else {
-    alert("Warteg Jaya Abadi Buka");
-  }
+  const jamTutup = 22;
+  const isOpen = hour >= jamBuka && hour <= jamTutup;
 
   return (
     <footer className="footer">
-      {new Date().getFullYear()} Warteg Jaya Abadi || Jam Buka {jamBuka} - Jam Tutup {jamTutup}{" "}
+      {isOpen ? (
+        <div className="order">
+          <p>
+            {new Date().getFullYear()} Warung Jaya Abadi - All rights reserved. || Buka jam {jamBuka} - Tutup jam {jamTutup}
+          </p>
+          <button className="btn">Order</button>
+        </div>
+      ) : (
+        <div className="closed">
+          <h3>Warung Jaya Abadi TUTUP</h3>
+          <p>
+            <b>{new Date().getFullYear()}</b> All rights reserved - Warung Jaya Abadi || Buka jam {jamBuka}.00 WIB - Tutup jam {jamTutup}.00 WIB
+          </p>
+        </div>
+      )}
     </footer>
   );
 }
